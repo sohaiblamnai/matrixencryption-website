@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <meta charset="UTF-8">
+     <meta name="author" content="Lamnai Sohaib">
+     <meta name="viewport" content="width=device-width initial-scale=1.0">
+     <link rel="stylesheet" href="matrixencryption.css">
+     <title>Lamnai Sohaib</title>
+</head>
+<body>
+    <div class="container">
+     <h2>Chiffrement de Sohaib</h2>
+     <label for="input">Texte à traiter :</label>
+      <input type="text" id="text" size="50" placeholder="Veuillez de ne pas dépasser 50 caractères"><br>
+      <input type="button" value="chiffrer" onclick="sohaib_encryption()"><input type="button" value="dechiffrer" onclick="sohaib_decryption()"><br><br>
+      <label for="input">Resultat :</label>
+      <input type="text" id="resultat" size="50" placeholder="Votre résultat s'affichera ici"><br>
+    </div>
+   
+      <script language="JavaScript">
+    function sohaib_encryption(){
+    var c = document.getElementById('text').value;
+    var k = new Array();
+    var length1 = c.length;
+    var d = '';
+
+    k[0] = ['q','w','e','r','t','z','u','i','o','p'];
+    k[1] = ['a','s','d','f','g','h','j','k','l','ö'];
+    k[2] = ['y','x','c','v','b','n','m',';',':','-'];
+    k[3] = ['1','3','4','6','9','7','5','2','0','8'];
+    k[4] = ['Q','E','R','T','Z','U','I','O','P','W'];
+    k[5] = ['S','A','F','D','H','G','K','J',' ','*'];
+    k[6] = ['X','Y','V','C','N','B','M','!','?','$'];
+   
+
+    for (var K = 0; K < length1; K++) {
+        var trouve = false;
+
+        for (var i = 0; i < 6 && !trouve; i++) {
+            for (var j = 0; j < 10 && !trouve; j++) {
+                if (c[K] == k[i][j]) {
+                    d += k[(i + 6) % 6][(j + 6) % 10];
+                    trouve = true;
+                }
+            }
+        }
+
+        if (!trouve) {
+            d += c[K]; 
+        }
+    }
+
+    document.getElementById('resultat').value = d;
+}
+   
+function sohaib_decryption(){
+    var c = document.getElementById('text').value;
+    var k = new Array();
+    var length1 = c.length;
+    var d = '';
+
+    k[0] = ['q','w','e','r','t','z','u','i','o','p'];
+    k[1] = ['a','s','d','f','g','h','j','k','l','ö'];
+    k[2] = ['y','x','c','v','b','n','m',';',':','-'];
+    k[3] = ['1','3','4','6','9','7','5','2','0','8'];
+    k[4] = ['Q','E','R','T','Z','U','I','O','P','W'];
+    k[5] = ['S','A','F','D','H','G','K','J',' ','*'];
+    k[6] = ['X','Y','V','C','N','B','M','!','?','$'];
+
+    for (var K = 0; K < length1; K++) {
+        var trouve = false;
+
+        for (var i = 0; i < 6 && !trouve; i++) {
+            for (var j = 0; j < 10 && !trouve; j++) {
+                if (c[K] == k[i][j]) {
+                    d += k[(i - 6 % 6 + 6) % 6][(j - 6 % 10 + 10) % 10];
+                    trouve = true;
+                }
+            }
+        }
+
+        if (!trouve) {
+            d += c[K]; 
+        }
+    }
+
+    document.getElementById('resultat').value = d;
+}
+</script>
+
+      
+
+
+
+</body>
+</html>
